@@ -13,7 +13,7 @@ class ConnectionHandler {
     return ConnectionHandler.instance;
   }
 
-  openSocket(port: number, messages: Map<string, () => void>): Socket {
+  openSocket(port: number, messages: Map<string, () => void> = new Map()): Socket {
     if (this.sockets.has(port)) {
       let socket = this.sockets.get(port);
       if (socket) return socket;

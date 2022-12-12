@@ -9,7 +9,7 @@ type MatchmakingElementPropsType = {
   userId: number;
   roomFound: boolean;
   players: Array<Player>;
-  onGameStart: ()=>void
+  onPlayerReady: (playerId: string, makeReady: boolean)=>void;
 };
 
 const MatchmakingElement = (props: MatchmakingElementPropsType) => {
@@ -25,7 +25,7 @@ const MatchmakingElement = (props: MatchmakingElementPropsType) => {
           setMatchmakingResponse={handleMatchFound}
         />
       ) : (
-        <MatchmakingLobbyFragment players={props.players} onGameStart={props.onGameStart}/>
+        <MatchmakingLobbyFragment players={props.players} onPlayerReady={props.onPlayerReady}/>
       )}
     </div>
   );

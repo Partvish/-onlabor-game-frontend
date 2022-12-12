@@ -1,4 +1,4 @@
-import { Paper, TableContainer } from "@mui/material";
+import { Button, Paper, TableContainer } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -8,31 +8,43 @@ import React from "react";
 import Player from "../entities/Player";
 
 type MatchmakingLobbyFragmentPropsType = {
-  onGameStart: () => void;
+  onPlayerReady: (playerId: string, makeReady: boolean)=> void;
   players: Array<Player>;
 };
 
 const MatchmakingLobbyFragment = (props: MatchmakingLobbyFragmentPropsType) => {
+  
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ maxWidth: "70%" }} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ maxWidth: "70%", margin: "auto" }}>
+      <Table  aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Ready</TableCell>
+            <TableCell align="center">Id</TableCell>
+            <TableCell align="center">Name</TableCell>
+            <TableCell align="center">Points</TableCell>
+            <TableCell align="center">Ready</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.players.map((player: Player) => (
-            <TableRow key={player.id}>
-              <TableCell component="th" scope="row">
-                {player.id}
-              </TableCell>
-              <TableCell align="right">{player.name}</TableCell>
-              <TableCell align="right">{player.ready}</TableCell>
-            </TableRow>
-          ))}
+          {props.players &&
+            props.players.map((player: Player) => (
+              <TableRow key={player.id}>
+                <TableCell  scope="row" align="center">
+                  {player.id}
+                </TableCell>
+                <TableCell align="center">{player.name}</TableCell>
+                <TableCell align="center">{player.name}</TableCell>
+                <TableCell align="center">
+                  <Button
+                    variant="contained"
+                    color={player.ready ? "success" : "error"}
+                    onClick={()=>{props.onPlayerReady(player.id, player.ready)}}
+                  >
+                    {player.ready ? "Ready" : "Not Ready"}
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

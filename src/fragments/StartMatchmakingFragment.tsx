@@ -20,13 +20,12 @@ const StartMatchmakingFragment = (props: StartMatchmakingFragmentPropsType) => {
     if (!response || !response.id || !response.port) return;
     ConnectionHandler.getInstance().closeSocket(5000);
     props.setMatchmakingResponse(response);
-
   });
   const socket: Socket = ConnectionHandler.getInstance().openSocket(
     5000,
     listeners
   );
-  const isConnected = ConnectionHandler.getInstance().isConnected(5000);
+  
 
   const handleClick = () => {
     setIsSearching(true);
@@ -35,21 +34,22 @@ const StartMatchmakingFragment = (props: StartMatchmakingFragmentPropsType) => {
 
   return (
     <div>
-      <div>Id: {props.userId}</div>
       {isSearching ? (
         <Box sx={{ display: "flex", margin: "auto", justifyContent: "center" }}>
           <CircularProgress />
         </Box>
       ) : (
-        <Box sx={{ display: "flex", margin: "auto", flexDirection: "column" }}>
-          {isConnected ? (
-            <Typography>Connected to the Server</Typography>
-          ) : (
-            <Typography>Not Connected to the server</Typography>
-          )}
-          <Typography>Click on the button to start matchmaking</Typography>
+        <Box
+          sx={{
+            display: "flex",
+            margin: "auto",
+            flexDirection: "column",
+            maxWidth: "70%",
+          }}
+        >
+          <Typography style={{marginBottom: 20}}>Click on the button to start matchmaking</Typography>
           <Button variant="contained" onClick={handleClick}>
-            Start
+            Start Matchmaking
           </Button>
         </Box>
       )}

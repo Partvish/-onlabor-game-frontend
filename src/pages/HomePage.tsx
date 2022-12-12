@@ -24,12 +24,14 @@ const HomePage = () => {
         return;
       }
       let body = await res.json();
-      if (!body || !body.token || !body.id) {
+      if (!body || !body.token || !body.id || !body.name) {
         alert("Something went wrong with the login process. Try again later.");
         return;
       }
       alert("Login successful");
-      navigate("/match", { state: { token: body.token, id: body.id } });
+      navigate("/match", {
+        state: { token: body.token, id: body.id, name: body.name },
+      });
     });
   };
 
