@@ -8,15 +8,14 @@ import React from "react";
 import Player from "../entities/Player";
 
 type MatchmakingLobbyFragmentPropsType = {
-  onPlayerReady: (playerId: string, makeReady: boolean)=> void;
+  onPlayerReady: (playerId: string, makeReady: boolean) => void;
   players: Array<Player>;
 };
 
 const MatchmakingLobbyFragment = (props: MatchmakingLobbyFragmentPropsType) => {
-  
   return (
     <TableContainer component={Paper} sx={{ maxWidth: "70%", margin: "auto" }}>
-      <Table  aria-label="simple table">
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="center">Id</TableCell>
@@ -29,16 +28,18 @@ const MatchmakingLobbyFragment = (props: MatchmakingLobbyFragmentPropsType) => {
           {props.players &&
             props.players.map((player: Player) => (
               <TableRow key={player.id}>
-                <TableCell  scope="row" align="center">
+                <TableCell scope="row" align="center">
                   {player.id}
                 </TableCell>
                 <TableCell align="center">{player.name}</TableCell>
-                <TableCell align="center">{player.name}</TableCell>
+                <TableCell align="center">{player.points}</TableCell>
                 <TableCell align="center">
                   <Button
                     variant="contained"
                     color={player.ready ? "success" : "error"}
-                    onClick={()=>{props.onPlayerReady(player.id, player.ready)}}
+                    onClick={() => {
+                      props.onPlayerReady(player.id, player.ready);
+                    }}
                   >
                     {player.ready ? "Ready" : "Not Ready"}
                   </Button>

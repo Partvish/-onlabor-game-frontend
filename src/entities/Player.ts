@@ -1,13 +1,15 @@
-class Player{
-    id: string
-    name: string
-    ready: boolean
-    
-    constructor(id: string, name: string, ready: boolean){
-        this.id = id
-        this.name = name
-        this.ready = ready
-    }
+class Player {
+  id: string;
+  name: string;
+  ready: boolean;
+  points: number;
+
+  constructor(id: string, name: string, ready: boolean, points: number) {
+    this.id = id;
+    this.name = name;
+    this.ready = ready;
+    this.points = points;
+  }
 }
 
-export default Player
+export default Player;
