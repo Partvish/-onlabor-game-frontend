@@ -1,18 +1,34 @@
-import React, { useState } from 'react'
-import MatchmakingLobbyFragment from '../fragments/MatchmakingLobbyFragment'
-import StartMatchmakingFragment from '../fragments/StartMatchmakingFragment'
+import React, { useState } from "react";
+import Player from "../entities/Player";
+import MatchmakingLobbyFragment from "../fragments/MatchmakingLobbyFragment";
+import StartMatchmakingFragment from "../fragments/StartMatchmakingFragment";
+import MatchFoundDto from "../sockets/MatchFoundDto";
 
-type MatchmakingElementPropsType={
-    onMatchStart: ()=>void
-}
+type MatchmakingElementPropsType = {
+  onRoomFound: (response: MatchFoundDto) => void;
+  userId: number;
+  roomFound: boolean;
+  players: Array<Player>;
+  onGameStart: ()=>void
+};
 
-const MatchmakingElement = ()=>{
-    const [isMatchFound, setIsMatchFound ] = useState(false)
-    return (
+const MatchmakingElement = (props: MatchmakingElementPropsType) => {
+  const handleMatchFound = (response: MatchFoundDto) => {
+    props.onRoomFound(response);
+  };
+
+  return (
     <div>
-        {(!isMatchFound)?<StartMatchmakingFragment/>:< MatchmakingLobbyFragment />}
+      {!props.roomFound ? (
+        <StartMatchmakingFragment
+          userId={props.userId}
+          setMatchmakingResponse={handleMatchFound}
+        />
+      ) : (
+        <MatchmakingLobbyFragment players={props.players} onGameStart={props.onGameStart}/>
+      )}
     </div>
-    )
-}
+  );
+};
 
-export default MatchmakingElement
+export default MatchmakingElement;
