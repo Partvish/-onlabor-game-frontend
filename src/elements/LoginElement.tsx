@@ -49,6 +49,7 @@ const LoginElement = (props: LoginElementPropsType) => {
         id="tPassword"
         label="Password"
         variant="filled"
+        type="password"
         onChange={(e) => {
           setPassword(e.target.value);
         }}

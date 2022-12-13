@@ -64,6 +64,7 @@ const UserFormElement = (props: UserFormElementPropsType) => {
         id="tPassword1"
         label="Password"
         variant="filled"
+        type="password"
         onChange={(e) => {
           setPassword1(e.target.value);
         }}
@@ -73,6 +74,7 @@ const UserFormElement = (props: UserFormElementPropsType) => {
         id="tPassword2"
         label="Password repeat"
         variant="filled"
+        type="password"
         onChange={(e) => {
           setPassword2(e.target.value);
         }}
